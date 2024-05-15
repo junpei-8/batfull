@@ -1,0 +1,32 @@
+---
+import { mergeCssProperty } from '@/utils/css';
+
+export type { Props as LayoutBodyMainProps };
+type Props = astroHTML.JSX.Attributes<'main'>;
+
+const attrs = Astro.props;
+---
+
+<main
+  {...attrs}
+  id={mergeCssProperty('layout-main', attrs.id)}
+  class={mergeCssProperty('main transition-fade', attrs.class)}
+>
+  <slot />
+</main>
+
+<style scoped lang="scss">
+  .main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  :global(.is-changing) .transition-fade {
+    opacity: 1;
+    transition: transition(opacity, short4, ease);
+  }
+  :global(.is-animating) .transition-fade {
+    opacity: 0;
+  }
+</style>

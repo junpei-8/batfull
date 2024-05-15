@@ -1,0 +1,13 @@
+---
+export type { Props as LayoutHtmlProps };
+type Props = astroHTML.JSX.Attributes<'html'>;
+
+const attrs = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja" {...attrs}>
+  <slot />
+
+
+</html>
