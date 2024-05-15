@@ -1,0 +1,19 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import NewBatThumbnail from './_/NewBatThumbnail.svelte';
+import NewBatCaption from './_/NewBatCaption.svelte';
+import NewBatSpot from './_/NewBatSpot.svelte';
+import NewBatSubmitter from './_/NewBatSubmitter.svelte';
+---
+
+<Layout>
+  <NewBatThumbnail client:idle />
+
+  <NewBatCaption />
+
+  <NewBatSpot client:idle />
+
+  <NewBatSubmitter client:idle />
+</Layout>
+
+<style scoped lang="scss"></style>

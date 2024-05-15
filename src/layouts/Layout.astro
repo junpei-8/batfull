@@ -14,7 +14,8 @@ import LayoutHeadSeo from './components/head/LayoutHeadSeo.astro';
 import type { LayoutHeadSeoProps } from './components/head/LayoutHeadSeo.astro';
 import LayoutHtml from './components/html/LayoutHtml.astro';
 import type { LayoutHtmlProps } from './components/html/LayoutHtml.astro';
-import LayoutFooter from './fragments/LayoutFooter.astro';
+import LayoutFooter from './fragments/footer/LayoutFooter.astro';
+import LayoutHeader from './fragments/header/LayoutHeader.astro';
 
 export type { Props as LayoutProps };
 type Props<T extends SEOSchemaModel.Thing = SEOSchemaModel.Thing> = {
@@ -47,7 +48,7 @@ const mainContentSlot =
     <slot name="body">
       <LayoutBody {...props.body}>
         <slot name="header">
-          <!-- <LayoutHeader /> -->
+          <LayoutHeader />
         </slot>
 
         <slot name="main">

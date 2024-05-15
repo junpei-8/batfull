@@ -1,5 +1,5 @@
 import cloudflare from '@astrojs/cloudflare';
-import db from '@astrojs/db';
+// import db from '@astrojs/db';
 import sitemap from '@astrojs/sitemap';
 import svelte from '@astrojs/svelte';
 import compress from '@playform/compress';
@@ -17,13 +17,15 @@ export default defineConfig({
 
   output: 'hybrid',
 
+  adapter: cloudflare(),
+
   /**
    * Astro のデプロイ・実行先を Cloudflare に設定するためのアダプター
    *
    * @see {@link https://astro.build/docs/deployments/cloudflare} Documents
    * @see {@link https://www.npmjs.com/package/@astrojs/cloudflare} npm
    */
-  adapter: cloudflare(),
+  // adapter: cloudflare(),
 
   server: {
     port: Number(import.meta.env.WEB_PORT) || void 0,
@@ -36,7 +38,7 @@ export default defineConfig({
      * @see {@link https://astrojs.dev/docs/integrations/db} Documents
      * @see {@link https://www.npmjs.com/package/@astrojs/db} npm
      */
-    db(),
+    // db(),
 
     /**
      * Astro 内で Swup.js を使用するためのインテグレーション
@@ -47,7 +49,9 @@ export default defineConfig({
     swup({
       theme: false,
       containers: ['#layout-main'],
-      animationClass: 'transition-',
+      updateBodyClass: true,
+      updateHead: true,
+      progress: true,
     }),
 
     /**
@@ -65,6 +69,7 @@ export default defineConfig({
      * @see {@link https://www.npmjs.com/package/astro-page-insight} npm
      */
     pageInsight(),
+
     /**
      * ビルド時にサイトマップを生成するためのインテグレーション
      *
@@ -87,13 +92,13 @@ export default defineConfig({
      * @see {@link https://github.com/Playform/Inline#ReadMe} Documents
      * @see {@link https://www.npmjs.com/package/@playform/inline} npm
      */
-    cssInline({
-      Critters: {
-        pruneSource: true,
-        inlineFonts: false,
-      },
-      Logger: 1,
-    }),
+    // cssInline({
+    //   Critters: {
+    //     pruneSource: true,
+    //     inlineFonts: false,
+    //   },
+    //   Logger: 1,
+    // }),
 
     /**
      * Astro のビルド時にさまざまなファイルを圧縮するためのインテグレーション

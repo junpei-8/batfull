@@ -1,0 +1,27 @@
+---
+import ResolverDialogContainer from './ResolverDialogContainer.svelte';
+import ResolverDialogAction from './content/ResolverDialogAction.svelte';
+import ResolvedContent from './content/ResolvedContent.svelte';
+---
+
+<ResolverDialogContainer client:idle>
+  <ResolvedContent
+    thumbnail="/demo/photo-1.jpg"
+    caption="No image found"
+    resolver=""
+  />
+
+  <div class="form">
+    <!-- <ResolverDialogAvatar /> -->
+
+    <ResolverDialogAction />
+  </div>
+</ResolverDialogContainer>
+
+<style scoped lang="scss">
+  .form {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+  }
+</style>

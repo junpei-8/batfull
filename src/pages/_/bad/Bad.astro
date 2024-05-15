@@ -1,0 +1,85 @@
+---
+import BadFavoriteButton from './BadFavoriteButton.svelte';
+import BadResolverOpener from './BadResolverOpener.svelte';
+---
+
+<section class="post">
+  <header class="header">
+    <img class="avatar" alt="" src="" />
+    <span class="name">Name</span>
+  </header>
+
+  <div class="thumbnail-frame">
+    <img class="thumbnail" alt="" src="/demo/photo-2.jpg" />
+  </div>
+
+  <div class="caption">Caption</div>
+
+  <nav class="nav">
+    <BadFavoriteButton client:idle />
+    <BadResolverOpener client:idle />
+  </nav>
+
+  <footer class="footer">
+    <!-- <span class="status">いいね！xx件</span> -->
+  </footer>
+</section>
+
+<style scoped lang="scss">
+  .post {
+    width: 100%;
+    max-width: 600px;
+    border-bottom: 2px solid $outline-variant;
+  }
+
+  .header {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 8px 8px 4px;
+    font-size: 16px;
+  }
+
+  .avatar {
+    width: 32px;
+    border-radius: 50%;
+  }
+
+  .thumbnail-frame {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: 200px; // あとで消す
+    max-height: 400px;
+    margin-bottom: 8px;
+    border: 1px solid $outline-variant;
+  }
+
+  .thumbnail {
+    object-fit: contain;
+  }
+
+  .nav {
+    box-sizing: border-box;
+    display: flex;
+    gap: 4px;
+    padding: 0 2px;
+  }
+
+  .footer {
+    box-sizing: border-box;
+    padding: 4px 8px 8px;
+  }
+
+  .status {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .caption {
+    padding-left: 8px;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+</style>

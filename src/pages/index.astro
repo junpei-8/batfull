@@ -1,7 +1,16 @@
 ---
 import Layout from '@/layouts/Layout.astro';
+import ResolverDialog from './_/resolver-dialog/ResolverDialog.astro';
+import Bad from './_/bad/Bad.astro';
 ---
 
 <Layout>
-  <div>test</div>
+  <Bad />
+
+  <ResolverDialog />
+
+  <script>
+    const endpoint = '/hoge.json';
+    console.log(await fetch(endpoint).then((res) => res.json()));
+  </script>
 </Layout>

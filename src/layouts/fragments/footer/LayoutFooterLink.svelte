@@ -1,0 +1,59 @@
+<script lang="ts">
+  import { onMount } from 'svelte';
+  import type { SvelteHTMLElements } from 'svelte/elements';
+
+  type $$Props = SvelteHTMLElements['a'] & {
+    href?: string;
+    requiredLogin?: boolean;
+  };
+
+  let href = $$props.href;
+
+  let isActive = false;
+
+  onMount(() => {
+    function checkActive() {
+      isActive = window.location.pathname === href;
+    }
+
+    checkActive();
+    document.addEventListener('swup:page:view', checkActive);
+    return () => document.removeEventListener('swup:page:view', checkActive);
+  });
+</script>
+
+<a
+  {...$$props}
+  class={`link ${$$props.class ? $$props.class : ''}${isActive ? ' active' : ''}`}
+>
+  <slot />
+</a>
+
+<style scoped lang="scss">
+  .link {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: transition((color, background), medium1, ease);
+
+    &.active {
+      color: $primary;
+    }
+
+    &:hover {
+      background-color: rgba(black, 0.04);
+      &.active {
+        background-color: rgba($primary, 0.04);
+      }
+    }
+
+    &:active {
+      background-color: rgba(black, 0.08);
+      &.active {
+        background-color: rgba($primary, 0.08);
+      }
+    }
+  }
+</style>

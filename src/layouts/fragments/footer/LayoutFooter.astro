@@ -1,0 +1,35 @@
+---
+import LayoutFooterLink from './LayoutFooterLink.svelte';
+import LayoutFooterGachaSvg from './svg/LayoutFooterGachaSvg.astro';
+import LayoutFooterHomeSvg from './svg/LayoutFooterHomeSvg.astro';
+import LayoutFooterNewSvg from './svg/LayoutFooterNewSvg.astro';
+---
+
+<footer class="footer">
+  <LayoutFooterLink href="/" aria-label="Goto Top Page" client:idle>
+    <LayoutFooterHomeSvg class="icon" />
+  </LayoutFooterLink>
+
+  <LayoutFooterLink href="/new" aria-label="Goto New Post Page" client:idle>
+    <LayoutFooterNewSvg class="icon" />
+  </LayoutFooterLink>
+
+  <LayoutFooterLink href="/gacha" aria-label="Goto Gacha Page" client:idle>
+    <LayoutFooterGachaSvg class="icon" />
+  </LayoutFooterLink>
+</footer>
+
+<style scoped lang="scss">
+  .footer {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    height: 48px;
+    border-top: 2px solid $outline-variant;
+  }
+
+  .icon {
+    width: 32px;
+    height: 32px;
+  }
+</style>

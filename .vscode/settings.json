@@ -23,7 +23,7 @@
   "typescript.tsdk": "node_modules/typescript/lib",
 
   "eslint.workingDirectories": [{ "mode": "auto" }],
-  "eslint.validate": ["javascript", "typescript", "astro", "svelte"],
+  "eslint.validate": ["javascript", "typescript"],
 
   "stylelint.validate": ["css", "scss", "astro", "svelte"],
 
