@@ -8,6 +8,7 @@
     "build": "astro check && astro build",
     "build:only": "astro build",
     "preview": "wrangler pages dev ./dist",
+    "deploy:web": "wrangler pages deploy dist",
     "astro": "astro"
   },
   "dependencies": {
