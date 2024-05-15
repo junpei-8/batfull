@@ -7,13 +7,12 @@ import auth0 from '@/utils/auth0';
 import { createFetcherStore } from './nanostore';
 
 export const userCoreQuery = createFetcherStore(`/user`, {
-  fetcher: () => getAuthHeader().then(() => auth0.getUser()),
+  fetcher: () => auth0.getTokenSilently().then(() => auth0.getUser()),
 });
 
 export const userQuery = createFetcherStore(`/user`, {
-  fetcher: async () => {
-    console.log('ユーザーとってくるよ', await getAuthHeader());
-  },
+  fetcher: () =>
+    getAuthHeader().then((headers) => fetch('/api/users.json', { headers })),
 });
 
 export async function loginUser(
@@ -25,22 +24,32 @@ export async function loginUser(
     // ポップアップと共にログインする
     await auth0.loginWithPopup(options, config);
 
-    const [userCore] = await Promise.all([auth0.getUser()]);
+    const [authHeader, userCore] = await Promise.all([
+      getAuthHeader(),
+      auth0.getUser(),
+    ]);
+
+    console.log(authHeader, userCore);
+
+    if (!authHeader || !userCore) {
+      throw new Error('正常に Auth0 からユーザー情報を取得できませんでした。');
+    }
 
     userCoreQuery.setKey('data', userCore);
 
-    // ログインをする
-    // const userResponse = await $fetch('/api/users', {
-    //   method: 'POST',
-    //   headers: getAuthHeader(),
-    //   body: JSON.stringify(body),
-    // });
+    const user = await fetch('/api/users.json', {
+      method: 'POST',
+      headers: authHeader,
+      body: JSON.stringify({
+        id: userCore.sub,
+        name: userCore.nickname || userCore.name,
+        picture: userCore.picture,
+      }),
+    });
 
-    // const user = userResponse.value;
+    userQuery.setKey('data', user);
 
-    // data.value = user;
-
-    // return user;
+    return user;
 
     // ↓ ログイン処理でエラーが発生した時の処理
   } catch (error) {

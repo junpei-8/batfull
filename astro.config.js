@@ -1,9 +1,9 @@
 import cloudflare from '@astrojs/cloudflare';
-// import db from '@astrojs/db';
+import db from '@astrojs/db';
 import sitemap from '@astrojs/sitemap';
 import svelte from '@astrojs/svelte';
 import compress from '@playform/compress';
-import cssInline from '@playform/inline';
+// import cssInline from '@playform/inline';
 import swup from '@swup/astro';
 import { defineConfig } from 'astro/config';
 import compressor from 'astro-compressor';
@@ -17,15 +17,13 @@ export default defineConfig({
 
   output: 'hybrid',
 
-  adapter: cloudflare(),
-
   /**
    * Astro のデプロイ・実行先を Cloudflare に設定するためのアダプター
    *
    * @see {@link https://astro.build/docs/deployments/cloudflare} Documents
    * @see {@link https://www.npmjs.com/package/@astrojs/cloudflare} npm
    */
-  // adapter: cloudflare(),
+  adapter: cloudflare(),
 
   server: {
     port: Number(import.meta.env.WEB_PORT) || void 0,
@@ -38,7 +36,7 @@ export default defineConfig({
      * @see {@link https://astrojs.dev/docs/integrations/db} Documents
      * @see {@link https://www.npmjs.com/package/@astrojs/db} npm
      */
-    // db(),
+    db(),
 
     /**
      * Astro 内で Swup.js を使用するためのインテグレーション
