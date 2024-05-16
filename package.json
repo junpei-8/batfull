@@ -35,7 +35,6 @@
     "astro-seo": "^0.8.3",
     "astro-seo-schema": "^4.0.0",
     "autoprefixer": "^10.4.19",
-    "fast-jwt": "^4.0.1",
     "nanostores": "^0.10.3",
     "postcss-sort-media-queries": "^5.2.0",
     "purgecss": "^6.0.0",

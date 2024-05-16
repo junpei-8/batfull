@@ -28,8 +28,8 @@ import Layout from '@/layouts/Layout.astro';
         ];
 
     const randomSource = sources[Math.floor(Math.random() * sources.length)];
-    video.querySelector('source').src = randomSource;
-    document.querySelector('.footer').id = 'gacha-page-footer';
+    video.querySelector('source')!.src = randomSource;
+    document.querySelector('.footer')!.id = 'gacha-page-footer';
 
     video.load();
     button.style.display = 'none';
@@ -55,10 +55,10 @@ import Layout from '@/layouts/Layout.astro';
     button.style.display = 'block';
     video.classList.remove('fade-in');
     video.removeEventListener('click', hideVideo);
-    document.querySelector('.footer').removeAttribute('id'); // IDを削除
+    document.querySelector('.footer')!.removeAttribute('id'); // IDを削除
   }
 
-  document.getElementById('video-btn').addEventListener('click', playVideo);
+  document.getElementById('video-btn')!.addEventListener('click', playVideo);
 </script>
 
 <Layout>
