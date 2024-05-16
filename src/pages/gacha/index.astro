@@ -2,6 +2,80 @@
 import Layout from '@/layouts/Layout.astro';
 ---
 
+<script>
+  function playVideo() {
+    const video = document.getElementById('gachaVideo') as HTMLVideoElement;
+    const button = document.getElementById('video-btn') as HTMLButtonElement;
+    const sources = [
+      '/src/pages/gacha/_/videos/pc-gacha_sake.mp4',
+      '/src/pages/gacha/_/videos/pc-gacha_ainai.mp4',
+      '/src/pages/gacha/_/videos/pc-gacha_kani.mp4',
+    ];
+    const randomSource = sources[Math.floor(Math.random() * sources.length)];
+    video.querySelector('source').src = randomSource;
+    video.load();
+    button.style.display = 'none';
+    setTimeout(() => {
+      video.style.display = 'block';
+      // Trigger reflow to restart the animation
+      void video.offsetWidth;
+      video.classList.add('fade-in');
+      video.play();
+      video.onended = () => {
+        video.addEventListener('click', hideVideo);
+      };
+    }, 1000);
+  }
+
+  function hideVideo() {
+    const video = document.getElementById('gachaVideo') as HTMLVideoElement;
+    const button = document.getElementById('video-btn') as HTMLButtonElement;
+    video.style.display = 'none';
+    button.style.display = 'block';
+    video.classList.remove('fade-in');
+    video.removeEventListener('click', hideVideo);
+  }
+
+  document.getElementById('video-btn').addEventListener('click', playVideo);
+</script>
+
 <Layout>
-  <div>Gacha</div>
+  <button id="video-btn">ガチャを引く</button>
+  <video id="gachaVideo" style="display:none;">
+    <source src="" type="video/mp4" />
+  </video>
 </Layout>
+
+<style>
+  button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 10px 20px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+    background-color: rgb(252, 209, 34);
+    border: 2px solid #000;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+  }
+
+  video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    transform: translate(-50%, -50%);
+  }
+
+  .fade-in {
+    opacity: 1;
+  }
+</style>
