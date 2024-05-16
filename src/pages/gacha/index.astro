@@ -4,21 +4,37 @@ import Layout from '@/layouts/Layout.astro';
 
 <script>
   function playVideo() {
-    const video = document.getElementById('gachaVideo') as HTMLVideoElement;
+    const pcVideo = document.getElementById('gacha-video') as HTMLVideoElement;
+    const spVideo = document.getElementById(
+      'sp-gacha-video',
+    ) as HTMLVideoElement;
+
     const button = document.getElementById('video-btn') as HTMLButtonElement;
-    const sources = [
-      '/src/pages/gacha/_/videos/pc-gacha_sake.mp4',
-      '/src/pages/gacha/_/videos/pc-gacha_ainai.mp4',
-      '/src/pages/gacha/_/videos/pc-gacha_kani.mp4',
-    ];
+
+    const isPc = window.matchMedia('(min-width: 1024px)').matches;
+
+    const video = isPc ? pcVideo : spVideo;
+
+    const sources = isPc
+      ? [
+          '/src/pages/gacha/_/videos/pc-gacha_sake.mp4',
+          '/src/pages/gacha/_/videos/pc-gacha_ainai.mp4',
+          '/src/pages/gacha/_/videos/pc-gacha_kani.mp4',
+        ]
+      : [
+          '/src/pages/gacha/_/videos/sp-gacha-ainai.mp4',
+          '/src/pages/gacha/_/videos/sp-gacha_sake.mp4',
+          '/src/pages/gacha/_/videos/sp-gacha_sika.mp4',
+        ];
+
     const randomSource = sources[Math.floor(Math.random() * sources.length)];
     video.querySelector('source').src = randomSource;
+    document.querySelector('.footer').id = 'gacha-page-footer';
+
     video.load();
     button.style.display = 'none';
     setTimeout(() => {
       video.style.display = 'block';
-      // Trigger reflow to restart the animation
-      void video.offsetWidth;
       video.classList.add('fade-in');
       video.play();
       video.onended = () => {
@@ -28,25 +44,53 @@ import Layout from '@/layouts/Layout.astro';
   }
 
   function hideVideo() {
-    const video = document.getElementById('gachaVideo') as HTMLVideoElement;
+    const spVideo = document.getElementById(
+      'sp-gacha-video',
+    ) as HTMLVideoElement;
+    const pcVideo = document.getElementById('gacha-video') as HTMLVideoElement;
+    const isPc = window.matchMedia('(min-width: 1024px)').matches;
+    const video = isPc ? pcVideo : spVideo;
     const button = document.getElementById('video-btn') as HTMLButtonElement;
     video.style.display = 'none';
     button.style.display = 'block';
     video.classList.remove('fade-in');
     video.removeEventListener('click', hideVideo);
+    document.querySelector('.footer').removeAttribute('id'); // IDを削除
   }
 
   document.getElementById('video-btn').addEventListener('click', playVideo);
 </script>
 
 <Layout>
-  <button id="video-btn">ガチャを引く</button>
-  <video id="gachaVideo" style="display:none;">
-    <source src="" type="video/mp4" />
-  </video>
+  <div class="page-bg">
+    <button id="video-btn">ガチャを引く</button>
+    <video id="gacha-video" style="display:none;">
+      <source src="" type="video/mp4" />
+    </video>
+
+    <video id="sp-gacha-video" style="display:none;">
+      <source src="" type="video/mp4" />
+    </video>
+  </div>
 </Layout>
 
-<style>
+<style scoped lang="scss">
+  .page-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url('/src/pages/gacha/_/images/pc-background.png.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 80%;
+    @include mp {
+      background-image: url('/src/pages/gacha/_/images/sp-background.png.jpg');
+      background-size: 100% 80%;
+    }
+  }
   button {
     position: absolute;
     top: 50%;
@@ -60,14 +104,19 @@ import Layout from '@/layouts/Layout.astro';
     border: 2px solid #000;
     border-radius: 5px;
     transform: translate(-50%, -50%);
+    @include mp {
+      padding: 10px;
+      font-size: 26px;
+    }
   }
 
   video {
     position: absolute;
     top: 50%;
     left: 50%;
-    z-index: 1;
+    z-index: 1000;
     width: 100%;
+    height: 100vh;
     height: 100%;
     object-fit: cover;
     opacity: 0;
@@ -77,5 +126,19 @@ import Layout from '@/layouts/Layout.astro';
 
   .fade-in {
     opacity: 1;
+  }
+
+  #gacha-video {
+    display: block;
+    @include mp {
+      display: none;
+    }
+  }
+
+  #sp-gacha-video {
+    display: none;
+    @include mp {
+      display: block;
+    }
   }
 </style>
