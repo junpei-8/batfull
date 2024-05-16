@@ -10,7 +10,12 @@ import LayoutFooterNewSvg from './svg/LayoutFooterNewSvg.astro';
     <LayoutFooterHomeSvg class="icon" />
   </LayoutFooterLink>
 
-  <LayoutFooterLink href="/new" aria-label="Goto New Post Page" client:idle>
+  <LayoutFooterLink
+    href="/new"
+    aria-label="Goto New Post Page"
+    client:idle
+    requiredLogin
+  >
     <LayoutFooterNewSvg class="icon" />
   </LayoutFooterLink>
 

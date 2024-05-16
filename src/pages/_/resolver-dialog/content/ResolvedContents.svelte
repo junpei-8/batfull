@@ -65,12 +65,15 @@
 
   .content {
     box-sizing: border-box;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 16px 24px;
-    justify-content: center;
     padding: 24px 0;
     border-bottom: 1px solid $outline-variant;
+
+    @include pc {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 16px 24px;
+      justify-content: center;
+    }
   }
 
   .beautifuller {

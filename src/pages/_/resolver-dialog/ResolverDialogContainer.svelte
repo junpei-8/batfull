@@ -21,7 +21,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 96%;
+    height: 88%;
     padding: 24px;
     margin-top: auto;
     overflow-y: auto;
@@ -40,7 +40,7 @@
     }
 
     @include pc {
-      height: 80%;
+      height: 72%;
     }
   }
 </style>
