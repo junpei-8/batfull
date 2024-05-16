@@ -1,7 +1,7 @@
-import { map } from 'nanostores';
+import { atom } from 'nanostores';
 
-export const newBat = map<{
-  caption?: string;
-  thumbnail?: string;
-  spot?: string;
-}>({});
+export const newBadCaption = atom('');
+
+export const newBadThumbnail = atom('');
+
+export const newBadSpot = atom('');

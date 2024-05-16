@@ -4,6 +4,7 @@
 
   type $$Props = SvelteHTMLElements['div'] & {
     isOpen?: boolean;
+    openClass?: string;
   };
 
   const dispatch = createEventDispatcher<{ close: void }>();
@@ -28,14 +29,17 @@
 </script>
 
 {#if isOpen}
-  <!-- svelte-ignore a11y_click_events_have_key_events -->
-  <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
     {...$$props}
-    class="drawer{isOpenAnimation ? ' open' : ''}"
-    on:click={() => dispatch('close')}
-    on:transitionend={close}
+    class="drawer{isOpenAnimation ? ` open ${$$props.openClass}` : ''}"
   >
+    <button
+      class="overlay"
+      on:click={() => dispatch('close')}
+      on:transitionend={close}
+      style={isOpenAnimation ? 'opacity: 1' : ''}
+      aria-label="Close Dialog"
+    ></button>
     <slot />
   </div>
 {/if}
@@ -54,13 +58,18 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
-    background-color: rgba(0, 0, 0, 0.64);
-    opacity: 0;
-    transition: transition(opacity, medium1, ease);
 
     &.open {
       pointer-events: auto;
-      opacity: 1;
     }
+  }
+
+  .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.64);
+    opacity: 0;
+    transition: transition(opacity, medium1, ease);
   }
 </style>

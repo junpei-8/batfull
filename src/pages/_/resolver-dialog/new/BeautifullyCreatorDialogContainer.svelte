@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { isOpenResolverDialog } from './state';
-
   import Dialog from '@/components/Dialog.svelte';
+  import { isOpenBeautifyCreatorDialog } from '../state';
 </script>
 
 <Dialog
-  isOpen={$isOpenResolverDialog}
-  on:close={() => ($isOpenResolverDialog = false)}
+  openClass="nest-open"
+  isOpen={$isOpenBeautifyCreatorDialog}
+  on:close={() => ($isOpenBeautifyCreatorDialog = false)}
 >
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -21,7 +21,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 96%;
+    height: 88%;
     padding: 24px;
     margin-top: auto;
     overflow-y: auto;
@@ -35,12 +35,8 @@
       display: none;
     }
 
-    :global(.open) & {
+    :global(.nest-open) & {
       transform: translateY(0);
-    }
-
-    @include pc {
-      height: 80%;
     }
   }
 </style>

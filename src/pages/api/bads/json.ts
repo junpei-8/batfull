@@ -1,5 +1,5 @@
 import type { APIContext, APIRoute } from 'astro';
-import { db, UserBad } from 'astro:db';
+import { db, desc, eq, User, UserBad } from 'astro:db';
 import { ulid } from 'ulidx';
 import { getApiAuth } from '@/api/auth';
 import { defineJsonEndpoint } from '@/api/response';
@@ -16,8 +16,16 @@ async function get() {
       caption: UserBad.caption,
       spot: UserBad.spot,
       createdAt: UserBad.createdAt,
+      badder: {
+        id: User.id,
+        name: User.name,
+        picture: User.picture,
+      },
     })
-    .from(UserBad);
+    .from(UserBad)
+    .innerJoin(User, eq(UserBad.badderId, User.id))
+    .orderBy(desc(UserBad.createdAt))
+    .limit(8);
 }
 
 export type PostRequest = {
@@ -33,7 +41,7 @@ async function post({ request }: APIContext) {
   const { thumbnail, caption, spot } = body;
   const badderId = auth.sub;
 
-  const id = await db
+  const [bad] = await db
     .insert(UserBad)
     .values({
       id: ulid(),
@@ -44,5 +52,5 @@ async function post({ request }: APIContext) {
     })
     .returning({ id: UserBad.id });
 
-  return { id };
+  return bad;
 }

@@ -22,6 +22,7 @@
   });
 </script>
 
+<!-- svelte-ignore a11y-missing-attribute -->
 <a
   {...$$props}
   class={`link ${$$props.class ? $$props.class : ''}${isActive ? ' active' : ''}`}

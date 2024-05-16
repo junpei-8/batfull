@@ -1,6 +1,6 @@
 <script lang="ts">
   import { getFileEvent } from '@/utils/file';
-  // import { newBat } from './state';
+  import { newBeautifullyThumbnail } from './state';
 
   let selectedFile: File | null = null;
   $: selectedFileUrl = selectedFile ? URL.createObjectURL(selectedFile) : '';
@@ -10,6 +10,11 @@
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
     selectedFile = file || null;
+
+    // photo-1.jpg 〜 photo-3.jpg までの差し替え画像を使用
+    newBeautifullyThumbnail.set(
+      `/demo/photo-${Math.floor(Math.random() * 3) + 1}.jpg`,
+    );
   }
 </script>
 
@@ -28,13 +33,19 @@
 <style scoped lang="scss">
   .frame {
     box-sizing: border-box;
-    width: 100%;
-    max-width: 320px;
+    width: auto;
+    max-width: 400px;
     aspect-ratio: 1;
     padding: 16px;
     margin: 0 auto;
     margin-bottom: 24px;
+    overflow: hidden;
     border: 2px solid $outline-variant;
     border-radius: 32px;
+
+    @include pc {
+      width: 100%;
+      max-width: 320px;
+    }
   }
 </style>

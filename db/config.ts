@@ -41,6 +41,8 @@ const UserBeautifully = defineTable({
 
     beautifullerId: column.text({ references: () => User.columns.id }),
 
+    thumbnail: column.text({ optional: true }),
+
     caption: column.text(),
 
     hasApproved: column.boolean({ default: false }),

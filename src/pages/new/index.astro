@@ -1,19 +1,34 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import NewBatThumbnail from './_/NewBatThumbnail.svelte';
-import NewBatCaption from './_/NewBatCaption.svelte';
-import NewBatSpot from './_/NewBatSpot.svelte';
-import NewBatSubmitter from './_/NewBatSubmitter.svelte';
+import NewBadThumbnail from './_/NewBadThumbnail.svelte';
+import NewBadCaption from './_/NewBadCaption.svelte';
+import NewBadSpot from './_/NewBadSpot.svelte';
+import NewBadSubmitter from './_/NewBadSubmitter.svelte';
 ---
 
-<Layout>
-  <NewBatThumbnail client:idle />
+<Layout
+  main={{
+    class: 'page-new',
+  }}
+>
+  <h2 class="h2">BAD を投稿する</h2>
 
-  <NewBatCaption />
+  <NewBadThumbnail client:idle />
 
-  <NewBatSpot client:idle />
+  <NewBadCaption client:idle />
 
-  <NewBatSubmitter client:idle />
+  <NewBadSpot client:idle />
+
+  <NewBadSubmitter client:idle />
 </Layout>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+  :global(.page-new) {
+    box-sizing: border-box;
+    padding: 0 24px;
+  }
+
+  .h2 {
+    margin-bottom: 32px;
+  }
+</style>

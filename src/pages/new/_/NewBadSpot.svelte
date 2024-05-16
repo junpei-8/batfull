@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { newBat } from './state';
+  import { newBadSpot } from './state';
 
   let gettingLocation = false;
 
@@ -23,7 +23,7 @@
       const data = await response.json();
 
       data && data.display_name
-        ? newBat.setKey('spot', data.display_name)
+        ? newBadSpot.set(data.display_name)
         : alert('逆ジオコーディングに失敗しました。');
 
       // エラー時はエラーメッセージを表示
@@ -87,7 +87,7 @@
     class="input"
     type="text"
     placeholder="場所を追加"
-    bind:value={$newBat.spot}
+    bind:value={$newBadSpot}
   />
 
   <button class="action" on:click={getLocation} disabled={gettingLocation}>
@@ -129,6 +129,7 @@
   .action {
     min-width: 80px;
     padding: 8px 16px;
+    font-size: 14px;
     color: white;
     background-color: rgba(#008dbd, 0.8);
     border-radius: 8px;

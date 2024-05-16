@@ -1,8 +1,14 @@
 <script lang="ts">
-  import { isOpenResolverDialog } from '../resolver-dialog/state';
+  import {
+    isOpenResolverDialog,
+    resolverTargetBadId,
+  } from '../resolver-dialog/state';
+
+  export let badId: string;
 
   function openPostDialog() {
     isOpenResolverDialog.set(true);
+    resolverTargetBadId.set(badId);
   }
 </script>
 

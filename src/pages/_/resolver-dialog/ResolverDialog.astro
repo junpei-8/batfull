@@ -1,21 +1,31 @@
 ---
 import ResolverDialogContainer from './ResolverDialogContainer.svelte';
 import ResolverDialogAction from './content/ResolverDialogAction.svelte';
-import ResolvedContent from './content/ResolvedContent.svelte';
+import ResolvedContents from './content/ResolvedContents.svelte';
+import BeautifullyCreatorDialogContainer from './new/BeautifullyCreatorDialogContainer.svelte';
+import BeautifullyCreatorCaption from './new/BeautifullyCreatorCaption.svelte';
+import BeautifullyCreatorSubmitter from './new/BeautifullyCreatorSubmitter.svelte';
+import BeautifullyCreatorThumbnail from './new/BeautifullyCreatorThumbnail.svelte';
 ---
 
 <ResolverDialogContainer client:idle>
-  <ResolvedContent
-    thumbnail="/demo/photo-1.jpg"
-    caption="No image found"
-    resolver=""
-  />
+  <ResolvedContents client:idle />
 
   <div class="form">
     <!-- <ResolverDialogAvatar /> -->
-
-    <ResolverDialogAction />
+    <ResolverDialogAction client:idle />
   </div>
+
+  <BeautifullyCreatorDialogContainer client:idle>
+    <h2 class="h2">Beautifully を投稿する</h2>
+
+    <div class="container">
+      <BeautifullyCreatorThumbnail client:idle />
+      <BeautifullyCreatorCaption client:idle />
+    </div>
+
+    <BeautifullyCreatorSubmitter client:idle />
+  </BeautifullyCreatorDialogContainer>
 </ResolverDialogContainer>
 
 <style scoped lang="scss">
@@ -23,5 +33,23 @@ import ResolvedContent from './content/ResolvedContent.svelte';
     position: sticky;
     bottom: 0;
     display: flex;
+    margin-top: auto;
+  }
+
+  .h2 {
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    @include pc {
+      flex-direction: row;
+      margin: auto 0;
+    }
   }
 </style>

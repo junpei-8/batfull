@@ -1,11 +1,11 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import ResolverDialog from './_/resolver-dialog/ResolverDialog.astro';
-import Bad from './_/bad/Bad.astro';
+import Bads from './_/bad/Bads.svelte';
 ---
 
 <Layout>
-  <Bad />
+  <Bads client:idle />
 
   <ResolverDialog />
 </Layout>

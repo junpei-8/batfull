@@ -1,4 +1,8 @@
-<button class="button">
+<script lang="ts">
+  import { isOpenBeautifyCreatorDialog } from '../state';
+</script>
+
+<button class="button" on:click={() => isOpenBeautifyCreatorDialog.set(true)}>
   <svg
     class="icon"
     xmlns="http://www.w3.org/2000/svg"

@@ -11,16 +11,17 @@ export const GET: APIRoute = (context) => defineJsonEndpoint(get, context);
 async function get(context: APIContext) {
   const auth = await getApiAuth(context.request);
 
-  console.log(auth);
-
-  return db
+  const [user] = await db
     .select({
       id: User.id,
       name: User.name,
       picture: User.picture,
     })
     .from(User)
-    .where(eq(User.id, auth.sub));
+    .where(eq(User.id, auth.sub))
+    .limit(1);
+
+  return user;
 }
 
 export type PostRequest = {
@@ -43,6 +44,7 @@ async function post({ request }: APIContext) {
       name,
       picture,
     })
+    .onConflictDoNothing()
     .returning({
       id: User.id,
       name: User.name,

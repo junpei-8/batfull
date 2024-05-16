@@ -9,5 +9,3 @@ export default new Auth0Client({
     audience: import.meta.env.WEB_AUTH_AUDIENCE,
   },
 });
-
-console.log(import.meta.env.WEB_AUTH_AUDIENCE);
