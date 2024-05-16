@@ -22,5 +22,5 @@ export default {
     },
   },
 
-  envPrefix: ['WEB'],
+  envPrefix: ['WEB', 'ASTRO'],
 };

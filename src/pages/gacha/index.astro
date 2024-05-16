@@ -17,14 +17,14 @@ import Layout from '@/layouts/Layout.astro';
 
     const sources = isPc
       ? [
-          '/src/pages/gacha/_/videos/pc-gacha_sake.mp4',
-          '/src/pages/gacha/_/videos/pc-gacha_ainai.mp4',
-          '/src/pages/gacha/_/videos/pc-gacha_kani.mp4',
+          '/demo/gacha/videos/pc-gacha_sake.mp4',
+          '/demo/gacha/videos/pc-gacha_ainai.mp4',
+          '/demo/gacha/videos/pc-gacha_kani.mp4',
         ]
       : [
-          '/src/pages/gacha/_/videos/sp-gacha-ainai.mp4',
-          '/src/pages/gacha/_/videos/sp-gacha_sake.mp4',
-          '/src/pages/gacha/_/videos/sp-gacha_sika.mp4',
+          '/demo/gacha/videos/sp-gacha-ainai.mp4',
+          '/demo/gacha/videos/sp-gacha_sake.mp4',
+          '/demo/gacha/videos/sp-gacha_sika.mp4',
         ];
 
     const randomSource = sources[Math.floor(Math.random() * sources.length)];
